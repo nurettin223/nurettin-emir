@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nurettin Emir - Sade & Modern Gym Portal</title>
     <style>
-        
         /* Modern ve Sade Temel Tasarım (Dark & Neon Minimalist) */
         :root {
             --bg-color: #0f0f12;
@@ -32,9 +26,9 @@
             min-height: 100vh;
         }
 
-        /* Yan Menü (Sidebar Navigasyon) */
+        /* 💻 MASAÜSTÜ (PC) İÇİN VARSAYILAN AYARLAR */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background: rgba(15, 15, 18, 0.95);
             border-right: 1px solid var(--border-color);
             display: flex;
@@ -43,14 +37,18 @@
             position: fixed;
             height: 100vh;
             box-sizing: border-box;
-            justify-content: space-between; /* Onay damgasını alta itmek için */
+            justify-content: space-between;
+            z-index: 100;
         }
 
         .sidebar-top h2 {
-            font-size: 22px;
+            font-size: 15px;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+            margin-top: 0;
             margin-bottom: 40px;
+            text-transform: uppercase;
             background: linear-gradient(45deg, var(--accent-cyan), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -82,7 +80,6 @@
             padding-left: 14px;
         }
 
-        /* HAVALI NURETTİN EMİR ONAYLI ROZETİ */
         .verified-badge {
             background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(138, 43, 226, 0.1));
             border: 1px solid rgba(0, 242, 254, 0.3);
@@ -103,7 +100,7 @@
 
         .verified-badge h4 {
             margin: 5px 0 0 0;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
             text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
@@ -115,16 +112,15 @@
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.1); }
         }
 
-        /* Ana İçerik Alanı */
+        /* PC Ana İçerik Alanı - Geniş ve Rahat */
         .main-content {
-            margin-left: 260px;
+            margin-left: 280px; /* Menünün sağından başlar */
             flex: 1;
             padding: 40px;
-            width: calc(100% - 260px);
+            width: calc(100% - 280px);
             box-sizing: border-box;
         }
 
-        /* ANA EKRAN HAVALI PROJE BAŞLIĞI */
         .project-header {
             text-align: center;
             margin-bottom: 40px;
@@ -179,7 +175,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Sade Kart Yapısı */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -197,7 +192,6 @@
             color: #fff;
         }
 
-        /* Form Elemanları (Giriş Ekranı) */
         .form-group {
             margin-bottom: 20px;
         }
@@ -244,7 +238,6 @@
             transform: translateY(-1px);
         }
 
-        /* Gym Programı Listesi */
         .workout-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -270,7 +263,6 @@
         .ex-name { font-weight: 600; font-size: 15px; }
         .ex-detail { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
-        /* İlerleme Çubuğu (Progress Bar) */
         .progress-container {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
@@ -287,7 +279,6 @@
             transition: width 0.4s ease;
         }
 
-        /* Clicker Oyunu Alanı */
         .game-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -329,7 +320,6 @@
             border-color: var(--accent-cyan);
         }
 
-        /* Karakter Kas Simülasyonu */
         .character-visual {
             margin-top: 20px;
             font-size: 14px;
@@ -358,7 +348,6 @@
             border-color: rgba(0, 242, 254, 0.3);
         }
 
-        /* Araçlar Listesi */
         .result-box {
             margin-top: 15px;
             padding: 15px;
@@ -375,6 +364,86 @@
             cursor: pointer;
             accent-color: var(--accent-cyan);
         }
+
+        /* 📱 SADECE TELEFONLARDA DEVREYE GİRECEK AYARLAR (MAX-WIDTH: 768px) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .sidebar-top h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 14px;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .nav-btn {
+                padding: 10px 12px;
+                font-size: 13px;
+                margin-bottom: 0;
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .nav-btn:hover, .nav-btn.active {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-cyan);
+                padding-left: 12px;
+            }
+
+            .verified-badge {
+                margin-top: 25px;
+                padding: 10px;
+            }
+
+            /* Mobilde sağdaki daralmayı tamamen önleyen esnek genişlik */
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 25px 15px;
+            }
+
+            .project-header h1 {
+                font-size: 26px;
+            }
+
+            .project-header .highlight-text {
+                font-size: 13px;
+            }
+
+            .workout-grid, .game-layout {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .dumbbell-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 55px;
+            }
+            
+            /* Kartların mobilde sağa sola rahatça yayılması */
+            .card {
+                padding: 20px;
+            }
+        }
+  
     </style>
 </body>
 </html>
