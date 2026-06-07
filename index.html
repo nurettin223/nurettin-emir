@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<head><!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +28,7 @@
             min-height: 100vh;
         }
 
-        /* 💻 MASAÜSTÜ (PC) İÇİN VARSAYILAN AYARLAR */
+        /* 💻 MASAÜSTÜ (PC) YAN MENÜ AYARLARI */
         .sidebar {
             width: 280px;
             background: rgba(15, 15, 18, 0.95);
@@ -112,9 +114,9 @@
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 242, 254, 0.1); }
         }
 
-        /* PC Ana İçerik Alanı - Geniş ve Rahat */
+        /* PC Ana İçerik Alanı */
         .main-content {
-            margin-left: 280px; /* Menünün sağından başlar */
+            margin-left: 280px;
             flex: 1;
             padding: 40px;
             width: calc(100% - 280px);
@@ -207,243 +209,7 @@
             width: 100%;
             padding: 12px;
             background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 15px;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
-        }
-
-        .btn {
-            background: linear-gradient(45deg, var(--accent-color), var(--accent-cyan));
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .workout-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .exercise-item {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .exercise-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .ex-name { font-weight: 600; font-size: 15px; }
-        .ex-detail { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
-
-        .progress-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            height: 8px;
-            width: 100%;
-            margin-top: 15px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-color));
-            width: 0%;
-            height: 100%;
-            transition: width 0.4s ease;
-        }
-
-        .game-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .clicker-area {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-counter {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .dumbbell-btn {
-            font-size: 70px;
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.1s ease;
-            user-select: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .dumbbell-btn:active {
-            transform: scale(0.92);
-            border-color: var(--accent-cyan);
-        }
-
-        .character-visual {
-            margin-top: 20px;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-        .biceps-growth {
-            font-size: 35px;
-            margin-top: 5px;
-            transition: 0.3s;
-        }
-
-        .shop-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            padding: 12px 18px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .shop-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(0, 242, 254, 0.3);
-        }
-
-        .result-box {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(0, 242, 254, 0.05);
-            border-left: 4px solid var(--accent-cyan);
-            border-radius: 4px;
-            font-weight: 600;
-            display: none;
-        }
-
-        .custom-checkbox {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: var(--accent-cyan);
-        }
-
-        /* 📱 SADECE TELEFONLARDA DEVREYE GİRECEK AYARLAR (MAX-WIDTH: 768px) */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 20px;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .sidebar-top h2 {
-                text-align: center;
-                margin-bottom: 20px;
-                font-size: 14px;
-            }
-
-            .nav-buttons {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            .nav-btn {
-                padding: 10px 12px;
-                font-size: 13px;
-                margin-bottom: 0;
-                flex: 1 1 auto;
-                text-align: center;
-            }
-
-            .nav-btn:hover, .nav-btn.active {
-                border-left: none;
-                border-bottom: 3px solid var(--accent-cyan);
-                padding-left: 12px;
-            }
-
-            .verified-badge {
-                margin-top: 25px;
-                padding: 10px;
-            }
-
-            /* Mobilde sağdaki daralmayı tamamen önleyen esnek genişlik */
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 25px 15px;
-            }
-
-            .project-header h1 {
-                font-size: 26px;
-            }
-
-            .project-header .highlight-text {
-                font-size: 13px;
-            }
-
-            .workout-grid, .game-layout {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .dumbbell-btn {
-                width: 120px;
-                height: 120px;
-                font-size: 55px;
-            }
-            
-            /* Kartların mobilde sağa sola rahatça yayılması */
-            .card {
-                padding: 20px;
-            }
-        }
-  
+            border
     </style>
 </body>
 </html>
