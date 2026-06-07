@@ -326,3 +326,431 @@
             color: var(--text-muted);
         }
         .biceps-growth {
+            font-size: 35px;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .shop-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 242, 254, 0.3);
+        }
+
+        .result-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 242, 254, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 4px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-cyan);
+        }
+
+        /* 📱 TELEFONLAR İÇİN KUSURSUZ MOBİL SÜRÜM (MAX-WIDTH: 768px) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                padding-bottom: 80px;
+            }
+
+            .sidebar-top h2, .verified-badge {
+                display: none;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 65px;
+                position: fixed;
+                bottom: 0;
+                top: auto;
+                left: 0;
+                background: #09090b;
+                border-right: none;
+                border-top: 1px solid var(--border-color);
+                padding: 0;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+
+            .sidebar-top {
+                width: 100%;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                width: 100%;
+                height: 100%;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .nav-btn {
+                margin-bottom: 0;
+                padding: 10px 5px;
+                font-size: 11px;
+                text-align: center;
+                flex: 1;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                white-space: nowrap;
+                color: #71717a;
+            }
+
+            .nav-btn:hover, .nav-btn.active {
+                background: none;
+                color: var(--accent-cyan);
+                border-left: none;
+                border-top: 2px solid var(--accent-cyan);
+                padding-left: 5px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px 12px;
+            }
+
+            .project-header {
+                margin-bottom: 25px;
+            }
+
+            .project-header h1 {
+                font-size: 24px;
+            }
+
+            .project-header .highlight-text {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+
+            .card {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+
+            .workout-grid, .game-layout {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .dumbbell-btn {
+                width: 110px;
+                height: 110px;
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-top">
+            <h2>Nurettin Emir'in Proje Ödevi İçin Spor Sitesi</h2>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="switchPage('login')">🔒 Giriş</button>
+                <button class="nav-btn" onclick="switchPage('workout')">🏋️ Program</button>
+                <button class="nav-btn" onclick="switchPage('game')">🎮 Clicker</button>
+                <button class="nav-btn" onclick="switchPage('tools')">📊 Araçlar</button>
+            </div>
+        </div>
+        
+        <div class="verified-badge">
+            <p>Sistem Altyapısı</p>
+            <h4>NURETTİN EMİR ONAYLI</h4>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="project-header">
+            <span class="sub-tag">Web Tasarım ve Programlama</span>
+            <h1>Nurettin Emir Çılgın Proje Ödevi</h1>
+            <div class="highlight-text">Premium Gym & Fitness Takip Portalı v2.0</div>
+        </div>
+
+        <div id="login" class="page active">
+            <div class="card" style="max-width: 450px; margin: 20px auto 0 auto;">
+                <h3>Kullanıcı Girişi</h3>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">E-posta Adresi</label>
+                        <input type="email" id="email" required placeholder="isim@ornek.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Şifre</label>
+                        <input type="password" id="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Giriş Yap</button>
+                </form>
+                <div id="loginSuccess" class="result-box" style="text-align: center; color: var(--accent-cyan);">✓ Sisteme Başarıyla Giriş Yapıldı! Program Kilidi Açıldı.</div>
+            </div>
+        </div>
+
+        <div id="workout" class="page">
+            <div class="card">
+                <h3>Günlük Antrenman Takip Listesi</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Tamamladığın hareketlerin yanındaki kutucukları işaretleyerek gelişim barını doldurabilirsin.</p>
+                
+                <div class="workout-grid">
+                    <div>
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 12px;">🔥 Üst Göğüs Bölgesi</h4>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Incline Dumbbell Press</span>
+                                <span class="ex-detail">4 Set x 12 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Incline Barbell Bench Press</span>
+                                <span class="ex-detail">4 Set x 10 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Incline Dumbbell Fly</span>
+                                <span class="ex-detail">3 Set x 15 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 12px;">🦵 Alt Bacak Bölgesi (Calf)</h4>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Standing Calf Raise</span>
+                                <span class="ex-detail">4 Set x 20 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Seated Calf Raise</span>
+                                <span class="ex-detail">4 Set x 15 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <span style="font-size: 14px; font-weight: 600;">Antrenman Tamamlanma Oranı:</span>
+                    <div class="progress-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="game" class="page">
+            <div class="card">
+                <h3>Gym Clicker: Kas Gücü Simülatörü</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 30px;">Dumbbell'a tıklayarak kas puanı kazan, kazandığın puanlarla takviyeler alarak gücünü katla!</p>
+                
+                <div class="game-layout">
+                    <div class="clicker-area">
+                        <div class="stat-counter"><span id="score">0</span> Kas Puanı</div>
+                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Saniyede Üretim (SPS): <span id="sps-counter">0</span></div>
+                        <div class="dumbbell-btn" onclick="clickDumbbell()">🏋️‍♂️</div>
+                        
+                        <div class="character-visual">
+                            Karakter Durumu: <span id="char-status" style="color: var(--accent-cyan); font-weight: bold;">Başlangıç</span>
+                            <div id="char-arms" class="biceps-growth">💪👶💪</div>
+                        </div>
+                    </div>
+
+                    <div class="shop-area">
+                        <h4 style="margin-top: 0; color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Takviye Mağazası</h4>
+                        
+                        <div id="shop-creatine" class="shop-item" onclick="buyUpgrade('creatine', 15, 1, 0)">
+                            <div>
+                                <strong>Kreatin Takviyesi</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Tıklama gücü +1 (Fiyat: 15 Puan)</span>
+                            </div>
+                            <span id="creatine-count" style="font-weight: bold; color: var(--accent-cyan);">0</span>
+                        </div>
+
+                        <div id="shop-protein" class="shop-item" onclick="buyUpgrade('protein', 50, 0, 2)">
+                            <div>
+                                <strong>Whey Protein Tozu</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Otomatik saniyede +2 Puan (Fiyat: 50 Puan)</span>
+                            </div>
+                            <span id="protein-count" style="font-weight: bold; color: var(--accent-cyan);">0</span>
+                        </div>
+
+                        <div id="shop-coach" class="shop-item" onclick="buyUpgrade('coach', 200, 0, 10)">
+                            <div>
+                                <strong>Kişisel Antrenör</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Otomatik saniyede +10 Puan (Fiyat: 200 Puan)</span>
+                            </div>
+                            <span id="coach-count" style="font-weight: bold; color: var(--accent-cyan);">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tools" class="page">
+            <div class="card" style="max-width: 500px;">
+                <h3>Vücut Kitle Endeksi (BMI) Hesaplayıcı</h3>
+                <div class="form-group">
+                    <label>Boyunuz (cm)</label>
+                    <input type="number" id="bmiHeight" placeholder="Örn: 175">
+                </div>
+                <div class="form-group">
+                    <label>Kilonuz (kg)</label>
+                    <input type="number" id="bmiWeight" placeholder="Örn: 70">
+                </div>
+                <button class="btn" onclick="calculateBMI()">Hesapla</button>
+                <div id="bmiResult" class="result-box"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            document.querySelectorAll('.nav-buttons').forEach(container => {
+                const buttons = container.querySelectorAll('.nav-btn');
+                if(pageId === 'login') buttons[0].classList.add('active');
+                if(pageId === 'workout') buttons[1].classList.add('active');
+                if(pageId === 'game') buttons[2].classList.add('active');
+                if(pageId === 'tools') buttons[3].classList.add('active');
+            });
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            document.getElementById('loginSuccess').style.display = 'block';
+            setTimeout(() => {
+                switchPage('workout');
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.ex-check');
+            const checkedCount = document.querySelectorAll('.ex-check:checked').length;
+            const percentage = (checkedCount / checkboxes.length) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        let score = 0;
+        let clickPower = 1;
+        let sps = 0;
+
+        let upgrades = {
+            creatine: { count: 0, cost: 15 },
+            protein: { count: 0, cost: 50 },
+            coach: { count: 0, cost: 200 }
+        };
+
+        function clickDumbbell() {
+            score += clickPower;
+            updateGameDisplay();
+        }
+
+        function buyUpgrade(type, baseCost, clickAdd, spsAdd) {
+            let upgrade = upgrades[type];
+            if (score >= upgrade.cost) {
+                score -= upgrade.cost;
+                upgrade.count++;
+                clickPower += clickAdd;
+                sps += spsAdd;
+                upgrade.cost = Math.round(upgrade.cost * 1.3);
+                updateGameDisplay();
+            }
+        }
+
+        function updateGameDisplay() {
+            document.getElementById('score').innerText = score;
+            document.getElementById('sps-counter').innerText = sps;
+            
+            document.getElementById('creatine-count').innerText = upgrades.creatine.count;
+            document.getElementById('shop-creatine').querySelector('span').innerText = `Tıklama gücü +1 (Fiyat: ${upgrades.creatine.cost} Puan)`;
+            
+            document.getElementById('protein-count').innerText = upgrades.protein.count;
+            document.getElementById('shop-protein').querySelector('span').innerText = `Otomatik saniyede +2 Puan (Fiyat: ${upgrades.protein.cost} Puan)`;
+            
+            document.getElementById('coach-count').innerText = upgrades.coach.count;
+            document.getElementById('shop-coach').querySelector('span').innerText = `Otomatik saniyede +10 Puan (Fiyat: ${upgrades.coach.cost} Puan)`;
+
+            let charStatus = document.getElementById('char-status');
+            let charArms = document.getElementById('char-arms');
+
+            if (score >= 500) {
+                charStatus.innerText = "Canavar (Yarı Tanrı)";
+                charStatus.style.color = "#ff4757";
+                charArms.innerText = "🦾🔥👹🔥🦾";
+            } else if (score >= 200) {
+                charStatus.innerText = "Profesyonel Bodybuilder";
+                charStatus.style.color = "var(--accent-color)";
+                charArms.innerText = "🦾🏋️‍♂️😎🏋️‍♂️🦾";
+            } else if (score >= 50) {
+                charStatus.innerText = "Fit Sporcu";
+                charStatus.style.color = "var(--accent-cyan)";
+                charArms.innerText = "💪💥🏃‍♂️💥💪";
+            } else {
+                charStatus.innerText = "Başlangıç";
+                charArms.innerText = "💪👶💪";
+            }
+        }
+
+        setInterval(() => {
+            score += sps;
+            updateGameDisplay();
+        }, 1000);
+
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('bmiHeight').value) / 100;
+            const weight = parseFloat(document.getElementById('bmiWeight').value);
+            const resultBox = document.getElementById('bmiResult');
+
+            if (height > 0 && weight > 0) {
+                const bmi = (weight / (height * height)).toFixed(1);
+                let text = `Vücut Kitle Endeksiniz (BMI): ${bmi} -> `;
+
+                if (bmi < 18.5) text += "Zayıf Kategorisindesiniz. Kalori artırın!";
+                else if (bmi < 25) text += "Normal Kilolu. Formunuz harika!";
+                else if (bmi < 30) text += "Fazla Kilolu. Kardiyoya ağırlık verin!";
+                else text += "Obezite Sınırı. Sıkı bir diyet ve antrenman gerekiyor.";
+
+                resultBox.innerText = text;
+                resultBox.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
