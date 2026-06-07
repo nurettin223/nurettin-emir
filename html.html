@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sade & Modern Gym Portal</title>
+    <style>
+        /* Modern ve Sade Temel Tasarım (Dark & Neon Minimalist) */
+        :root {
+            --bg-color: #0f0f12;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-color: #8a2be2; /* Neon Mor */
+            --accent-cyan: #00f2fe; /* Neon Turkuaz */
+            --text-color: #f1f2f6;
+            --text-muted: #a4b0be;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Yan Menü (Sidebar Navigasyon) */
+        .sidebar {
+            width: 250px;
+            background: rgba(15, 15, 18, 0.95);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .sidebar h2 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-left: 4px solid var(--accent-cyan);
+            padding-left: 14px;
+        }
+
+        /* Ana İçerik Alanı */
+        .main-content {
+            margin-left: 250px;
+            flex-content: 1;
+            padding: 40px;
+            width: calc(100% - 250px);
+            box-sizing: border-box;
+        }
+
+        .page {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sade Kart Yapısı */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 22px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            color: #fff;
+        }
+
+        /* Form Elemanları (Giriş Ekranı) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        input[type="email"], input[type="password"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-cyan));
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Gym Programı Listesi */
+        .workout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .exercise-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ex-name { font-weight: 600; font-size: 15px; }
+        .ex-detail { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+        /* İlerleme Çubuğu (Progress Bar) */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            height: 8px;
+            width: 100%;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-color));
+            width: 0%;
+            height: 100%;
+            transition: width 0.4s ease;
+        }
+
+        /* Clicker Oyunu Alanı */
+        .game-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .clicker-area {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-counter {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .dumbbell-btn {
+            font-size: 70px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.1s ease;
+            user-select: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .dumbbell-btn:active {
+            transform: scale(0.92);
+            border-color: var(--accent-cyan);
+        }
+
+        /* Karakter Kas Simülasyonu */
+        .character-visual {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .biceps-growth {
+            font-size: 35px;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shop-item.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Araçlar Listesi */
+        .result-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 242, 254, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 4px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-cyan);
+        }
+    </style>
+</body>
+</html>
+div class="sidebar">
+        <h2>FITNESS HUB</h2>
+        <button class="nav-btn active" onclick="switchPage('login')">🔒 Giriş Ekranı</button>
+        <button class="nav-btn" onclick="switchPage('workout')">🏋️ Gym Programı</button>
+        <button class="nav-btn" onclick="switchPage('game')">🎮 Kas Clicker (Oyun)</button>
+        <button class="nav-btn" onclick="switchPage('tools')">📊 Hesaplama Araçları</button>
+    </div>
+
+    <!-- ANA İÇERİK ALANI -->
+    <div class="main-content">
+
+        <!-- SAYFA 1: GİRİŞ EKRANI -->
+        <div id="login" class="page active">
+            <div class="card" style="max-width: 450px; margin: 60px auto 0 auto;">
+                <h3>Kullanıcı Girişi</h3>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">E-posta Adresi</label>
+                        <input type="email" id="email" required placeholder="isim@ornek.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Şifre</label>
+                        <input type="password" id="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Giriş Yap</button>
+                </form>
+                <div id="loginSuccess" class="result-box" style="text-align: center; color: var(--accent-cyan);">✓ Sisteme Başarıyla Giriş Yapıldı! Program Kilidi Açıldı.</div>
+            </div>
+        </div>
+
+        <!-- SAYFA 2: GYM PROGRAMI -->
+        <div id="workout" class="page">
+            <div class="card">
+                <h3>Günlük Antrenman Takip Listesi</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Tamamladığın hareketlerin yanındaki kutucukları işaretleyerek gelişim barını doldurabilirsin.</p>
+                
+                <div class="workout-grid">
+                    <!-- Üst Göğüs -->
+                    <div>
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 12px;">🔥 Üst Göğüs Bölgesi</h4>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Incline Dumbbell Press</span>
+                                <span class="ex-detail">4 Set x 12 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Incline Barbell Bench Press</span>
+                                <span class="ex-detail">4 Set x 10 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Incline Dumbbell Fly</span>
+                                <span class="ex-detail">3 Set x 15 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                    </div>
+
+                    <!-- Alt Bacak -->
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 12px;">🦵 Alt Bacak Bölgesi (Calf)</h4>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Standing Calf Raise</span>
+                                <span class="ex-detail">4 Set x 20 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                        <div class="exercise-item">
+                            <div class="exercise-info">
+                                <span class="ex-name">Seated Calf Raise</span>
+                                <span class="ex-detail">4 Set x 15 Tekrar</span>
+                            </div>
+                            <input type="checkbox" class="custom-checkbox ex-check" onchange="updateProgress()">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <span style="font-size: 14px; font-weight: 600;">Antrenman Tamamlanma Oranı:</span>
+                    <div class="progress-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAYFA 3: MINI OYUN (GYM CLICKER) -->
+        <div id="game" class="page">
+            <div class="card">
+                <h3>Gym Clicker: Kas Gücü Simülatörü</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 30px;">Dumbbell'a tıklayarak kas puanı kazan, kazandığın puanlarla takviyeler alarak gücünü katla!</p>
+                
+                <div class="game-layout">
+                    <div class="clicker-area">
+                        <div class="stat-counter"><span id="score">0</span> Kas Puanı</div>
+                        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Saniyede Üretim (SPS): <span id="sps-counter">0</span></div>
+                        <div class="dumbbell-btn" onclick="clickDumbbell()">🏋️‍♂️</div>
+                        
+                        <div class="character-visual">
+                            Karakter Durumu: <span id="char-status" style="color: var(--accent-cyan); font-weight: bold;">Başlangıç</span>
+                            <div id="char-arms" class="biceps-growth">💪👶💪</div>
+                        </div>
+                    </div>
+
+                    <div class="shop-area">
+                        <h4 style="margin-top: 0; color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Takviye Mağazası</h4>
+                        
+                        <div id="shop-creatine" class="shop-item" onclick="buyUpgrade('creatine', 15, 1, 0)">
+                            <div>
+                                <strong>Kreatin Takviyesi</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Tıklama gücü +1 (Fiyat: 15 Puan)</span>
+                            </div>
+                            <span id="creatine-count" style="font-weight: bold; color: var(--accent-cyan);">0</span>
+                        </div>
+
+                        <div id="shop-protein" class="shop-item" onclick="buyUpgrade('protein', 50, 0, 2)">
+                            <div>
+                                <strong>Whey Protein Tozu</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Otomatik saniyede +2 Puan (Fiyat: 50 Puan)</span>
+                            </div>
+                            <span id="protein-count" style="font-weight: bold; color: var(--accent-cyan);">0</span>
+                        </div>
+
+                        <div id="shop-coach" class="shop-item" onclick="buyUpgrade('coach', 200, 0, 10)">
+                            <div>
+                                <strong>Kişisel Antrenör</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Otomatik saniyede +10 Puan (Fiyat: 200 Puan)</span>
+                            </div>
+                            <span id="coach-count" style="font-weight: bold; color: var(--accent-cyan);">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAYFA 4: HESAPLAMA ARAÇLARI -->
+        <div id="tools" class="page">
+            <div class="card" style="max-width: 500px;">
+                <h3>Vücut Kitle Endeksi (BMI) Hesaplayıcı</h3>
+                <div class="form-group">
+                    <label>Boyunuz (cm)</label>
+                    <input type="number" id="bmiHeight" placeholder="Örn: 175">
+                </div>
+                <div class="form-group">
+                    <label>Kilonuz (kg)</label>
+                    <input type="number" id="bmiWeight" placeholder="Örn: 70">
+                </div>
+                <button class="btn" onclick="calculateBMI()">Hesapla</button>
+                <div id="bmiResult" class="result-box"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SİTE FONKSİYONLARI (JAVASCRIPT) -->
+    <script>
+        // Sayfa Geçiş Mekanizması
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Simüle Giriş Sistemi
+        function handleLogin(e) {
+            e.preventDefault();
+            document.getElementById('loginSuccess').style.display = 'block';
+            setTimeout(() => {
+                switchPage('workout');
+            }, 1000);
+        }
+
+        // Program İlerleme Durumu
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.ex-check');
+            const checkedCount = document.querySelectorAll('.ex-check:checked').length;
+            const percentage = (checkedCount / checkboxes.length) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        // Clicker Oyunu Mantığı
+        let score = 0;
+        let clickPower = 1;
+        let sps = 0;
+
+        let upgrades = {
+            creatine: { count: 0, cost: 15 },
+            protein: { count: 0, cost: 50 },
+            coach: { count: 0, cost: 200 }
+        };
+
+        function clickDumbbell() {
+            score += clickPower;
+            updateGameDisplay();
+        }
+
+        function buyUpgrade(type, baseCost, clickAdd, spsAdd) {
+            let upgrade = upgrades[type];
+            if (score >= upgrade.cost) {
+                score -= upgrade.cost;
+                upgrade.count++;
+                clickPower += clickAdd;
+                sps += spsAdd;
+                upgrade.cost = Math.round(upgrade.cost * 1.3); // Fiyat artışı
+                updateGameDisplay();
+            }
+        }
+
+        function updateGameDisplay() {
+            document.getElementById('score').innerText = score;
+            document.getElementById('sps-counter').innerText = sps;
+            
+            document.getElementById('creatine-count').innerText = upgrades.creatine.count;
+            document.getElementById('shop-creatine').querySelector('span').innerText = `Tıklama gücü +1 (Fiyat: ${upgrades.creatine.cost} Puan)`;
+            
+            document.getElementById('protein-count').innerText = upgrades.protein.count;
+            document.getElementById('shop-protein').querySelector('span').innerText = `Otomatik saniyede +2 Puan (Fiyat: ${upgrades.protein.cost} Puan)`;
+            
+            document.getElementById('coach-count').innerText = upgrades.coach.count;
+            document.getElementById('shop-coach').querySelector('span').innerText = `Otomatik saniyede +10 Puan (Fiyat: ${upgrades.coach.cost} Puan)`;
+
+            // Kas Büyüme Görselleştirmesi
+            let charStatus = document.getElementById('char-status');
+            let charArms = document.getElementById('char-arms');
+
+            if (score >= 500) {
+                charStatus.innerText = "Canavar (Yarı Tanrı)";
+                charStatus.style.color = "#ff4757";
+                charArms.innerText = "🦾🔥👹🔥🦾";
+            } else if (score >= 200) {
+                charStatus.innerText = "Profesyonel Bodybuilder";
+                charStatus.style.color = "var(--accent-color)";
+                charArms.innerText = "🦾🏋️‍♂️😎🏋️‍♂️🦾";
+            } else if (score >= 50) {
+                charStatus.innerText = "Fit Sporcu";
+                charStatus.style.color = "var(--accent-cyan)";
+                charArms.innerText = "💪💥🏃‍♂️💥💪";
+            } else {
+                charStatus.innerText = "Başlangıç";
+                charArms.innerText = "💪👶💪";
+            }
+        }
+
+        // Zamanlayıcı (Pasif Kas Puanı Kazanımı)
+        setInterval(() => {
+            score += sps;
+            updateGameDisplay();
+        }, 1000);
+
+        // BMI Hesaplama Motoru
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('bmiHeight').value) / 100;
+            const weight = parseFloat(document.getElementById('bmiWeight').value);
+            const resultBox = document.getElementById('bmiResult');
+
+            if (height > 0 && weight > 0) {
+                const bmi = (weight / (height * height)).toFixed(1);
+                let text = `Vücut Kitle Endeksiniz (BMI): ${bmi} -> `;
+
+                if (bmi < 18.5) text += "Zayıf Kategorisindesiniz. Kalori artırın!";
+                else if (bmi < 25) text += "Normal Kilolu. Formunuz harika!";
+                else if (bmi < 30) text += "Fazla Kilolu. Kardiyoya ağırlık verin!";
+                else text += "Obezite Sınırı. Sıkı bir diyet ve antrenman gerekiyor.";
+
+                resultBox.innerText = text;
+                resultBox.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
